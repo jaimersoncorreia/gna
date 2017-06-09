@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="numerosaoQuadrado">
+<head>
+	<meta charset="utf-8">
+	<title>Trabalho de Modelagem</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="lib/treinar/treinar.css">
+	<script src="lib/angular/angular.js" ></script>
+	<script>
+		angular.module("numerosaoQuadrado",[]);
+		angular.module("numerosaoQuadrado").controller("numerosaoQuadradoa",function ($scope) {
+			$scope.app = "Gerador de Números Aleatórios";
+			$scope.quantidades = [];
+
+			$scope.geradorAleatorio = function(quantidade) {
+				$scope.quantidades.length = 0;
+				qtde = quantidade;
+
+				var h = new Date().getTime();
+				h = h+'';
+
+				//x = 76;//76 pega semente
+				x = h.substr(h.length-2,2);
+				for (var j = 0; j < qtde + 1 ; j++) {
+					x = x + '';
+					while(x.length < 2){
+						x = "0" + x;
+					}
+					$scope.quantidades[j] = [j+1,x];
+					n = parseInt(x)*parseInt(x);
+					n = n + '';
+					while (n.length < 4) {
+    					n = "0" + n;
+					}
+					x = parseInt(n.substr(1,2));
+					console.log(x);
+					
+					
+				}
+				$scope.pegarTempo = h;
+			}
+
+			
+			
+			$scope.metodo = "Método Meio Quadrado";
+		});
+	</script>
+</head>
+	
+<body ng-controller="numerosaoQuadradoa">
+	<div class="jumbotron">
+		<h4>{{app}}</h4>
+		<h5>{{metodo}}</h5>
+		<input class="form-control" type="number" min="0" ng-model="quantidade" placeholder="Digite a quantidades de Números que deseja!" />
+		<button class="btn btn-primary btn-block" ng-click="geradorAleatorio(quantidade)">Adicionar quantidade</button>
+
+		<hr>
+		<table class="table table-striped">
+			<tr>
+				<th>Ns</th>
+				<th>Aleatório</th>
+			</tr>
+			<tr ng-repeat="quantidade in quantidades">
+				<td>{{quantidade[0]}}</td>
+				<td>{{quantidade[1]}}</td>
+			</tr>
+			<tr>
+				<td>Semente</td>
+				<td>{{pegarTempo}}</td>
+			</tr>
+		</table>
+		
+		
+	</div>
+	<div class="jumbotron">
+		<h4>Equipe:</h4>
+		<h6>Jaimerson Correia dos Santos</h6>
+		<h6>Victor de Alencar Assis</h6>
+		<h6>Oziel Senior Coelho Moraes</h6>
+		<h6>Thiago Vieira de Negreiros</h6>
+	</div>
+</body>
+</html>
